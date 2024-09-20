@@ -1,0 +1,106 @@
+{% include 'navbar.html' %}
+{% block content %}
+<div class="sections">
+    <section id="fee-struct">
+            <div class="container">
+                <div class="row">
+                    <div class="d-flex justify-content-between">
+                    <h3 class="h4"><strong>Fees Structure</strong></h3>
+                    <a href="{% url 'courseDetails' %}" class="btn btn-outline-success">Course Details</a>
+                    </div>
+                    <div class="col-5 my-3">
+                        <div class="card shadow ms-2">
+                            <div class="card-header">
+                                <h3 class="h5 text-center">Transport</h3>
+                            </div>
+                            <div class="card-body">
+                                
+                                <table class="table table-borderless table-sm">
+                                    <thead>
+                                    <tr>
+                                        <th>Kilo Meter</th>
+                                        <th>Fees/sem</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>2Km</td>
+                                            <td>2000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3Km - 4km</td>
+                                            <td>3000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5km - 8km</td>
+                                            <td>7000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9km - 12km</td>
+                                            <td>13000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="card my-3 shadow ms-2">
+                            <div class="card-header bg-gradient">
+                                <h3 class="h5 text-center">Lab Charge</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-borderless table-sm">
+                                    <thead>
+                                    <tr>
+                                        <th>Department</th>
+                                        <th>Charge</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>B.Sc</td>
+                                            <td>300</td>
+                                        </tr>
+                                        <tr>
+                                            <td>BCA</td>
+                                            <td>350</td>
+                                        </tr>
+                                        <tr>
+                                            <td>BA</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td>BBA</td>
+                                            <td>100</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5 my-3">
+                        <div class="card shadow ms-2">
+                                <div class="card-header">
+                                    <h3 class="h5 text-center">Other Fees</h3>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-borderless table-sm">
+                                        <tr>
+                                            <td><h3 class="h6">Hostel Fees</h3></td>
+                                            <td><p class="p">65000</p></td></tr>
+                                        </tr>
+                                        <tr>
+                                            <td><h3 class="h6">Library Fees</h3></td>
+                                            <td><p class="p">200</p></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

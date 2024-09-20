@@ -1,0 +1,221 @@
+{% include 'navbar.html' %}
+{% block content %}
+<div class="sections">
+<section id="stdpayment">
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == 'error' %}
+    <div class="alert alert-danger">
+        <span class="fa fa-times-circle fs-5"></span> {{message}}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    <div class="d-flex justify-content-end">
+    <div>
+        <a href="{% url 'feePayment' %}" class="text-decoration-none">Home</a>
+        <a href="{% url 'checkFees' std_id.id %}" class="text-decoration-none text-secondary"> / Check Fees</a>
+    </div>
+</div>
+    <h3 class="h3 text-center"><strong>Fees Payment</strong></h3>
+    <div class="container">
+        <div class="row justify-content-center">
+            <h4 class="h5 text-center py-2 mt-2"><strong>Check Fees</strong></h4>
+            <div class="col-10">
+                <div class="card">
+                    <div class="card-header p-4">
+                        <div class="row justify-content-center">
+                            <div class="col-9">
+                                <div class="row p-2">
+                                    <div class="col-6 py-2">
+                                        <h4 class="h6"><b>Name :</b> {{std_id.name}}</h4>
+                                    </div>
+                                    <div class="col-6 py-2">
+                                        <h4 class="h6"><b>Dept :</b> {{std_id.dept}}</h4>
+                                    </div>
+                                    <div class="col-6 py-2">
+                                        <h4 class="h6"><b>Reg.no :</b> {{std_id.regno}}</h4>
+                                    </div>
+                                    <div class="col-6 py-2">
+                                        <h4 class="h6"><b>Year :</b> {{std_id.year}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-10">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fee Type</th>
+                <th>Amount</th>
+                <th>Paid</th>
+                <th>Paid Date</th>
+                <th>Pending</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                <td>Tution Fees</td>
+                <td class="text-start ps-4">{{std_id.course_fees}}.00</td>
+                <td>{{paid_tution}}.00</td>
+                <td></td>
+                <td>{{std_id.pending_course}}.00</td>
+                <td><button class="btn btn-outline-secondary rounded-circle btn-sm">{{course_status}}</button></td>
+                {% if course_status == 'Pending' or course_status == 'Unpaid' %}
+                <td><button class="btn btn-success" onclick="openpopup('Tution Fees','{{std_id.course_fees}}.00')">Collect Fees</button></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                </tr>
+
+                {% if tution_fees %}
+                {% for i in tution_fees %}
+                <tr>
+                <td></td>
+                <td></td>
+                <td>{{i.paidamount}}.00</td>
+                <td>{{i.paiddate}}</td>
+                <td></td>
+                <td></td>
+                <td><button class="btn btn-primary">Print</button></td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+                {% if std_id.transport|lower == 'yes' %}
+                <tr>
+                    <td>Transport Fees</td>
+                    <td class="text-start ps-4">{{std_id.transport_fees}}.00</td>
+                    <td>{{paid_transport}}.00</td>
+                    <td></td>
+                    <td>{{std_id.pending_trasport}}.00</td>
+                    <td><button class="btn btn-outline-secondary rounded-circle btn-sm">{{transport_status}}</button></td>
+                    {% if transport_status == 'Pending' or transport_status == 'Unpaid' %}
+                    <td><button class="btn btn-success" onclick="openpopup('Transport Fees','{{std_id.transport_fees}}.00')">Collect Fees</button></td>
+                    {% else %}
+                    <td></td>
+                    {% endif %}
+                    </tr>
+    
+                    {% if transport_fees %}
+                    {% for i in transport_fees %}
+                    <tr>
+                    <td></td>
+                    <td></td>
+                    <td>{{i.paidamount}}.00</td>
+                    <td>{{i.paiddate}}</td>
+                    <td></td>
+                    <td></td>
+                    <td><button class="btn btn-primary">Print</button></td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                    {% endif %}
+                    {% if std_id.hostel|lower == 'yes' %}
+                    <tr>
+                        <td>Hostel Fees</td>
+                        <td class="text-start ps-4">{{std_id.hostel_fees}}.00</td>
+                        <td>{{paid_hostel}}.00</td>
+                        <td></td>
+                        <td>{{std_id.pending_hostel}}.00</td>
+                        <td><button class="btn btn-outline-secondary rounded-circle btn-sm">{{hostel_status}}</button></td>
+                        {% if hostel_status == 'Pending' or hostel_status == 'Unpaid' %}
+                        <td><button class="btn btn-success" onclick="openpopup('Hostel Fees','{{std_id.hostel_fees}}.00')">Collect Fees</button></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
+                        </tr>
+
+                        {% if hostel_fees %}
+                        {% for i in hostel_fees %}
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td>{{i.paidamount}}.00</td>
+                        <td>{{i.paiddate}}</td>
+                        <td></td>
+                        <td></td>
+                        <td><button class="btn btn-primary">Print</button></td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        {% endif %}
+        </tbody> 
+    </table>
+    </div>
+    </div>
+<div class="container">
+    <div id="popup" class="popup">
+    <div class="popup-content">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div class="card p-2">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="d-flex justify-content-between p-3">
+                    <h3 class="h5">Collect Fees</h3>
+                    <span class="fa fa-times" onclick="closepopup()"></span>
+                    </div>
+                    <div class="form-group p-3">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="feeamt">Fees Amount</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="text" id="feeamt" name="feesamt" class="form-control" value="" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group p-3">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="paidamt">Paid Amount</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="text" id="paidamt" class="form-control" name="paidamt" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group p-3">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="paiddate">Paid Date</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="date" id="paiddate" class="form-control" name="paiddate" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group p-3">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="ftype">Type</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="text" id="ftype" class="form-control" name="ftype" value="" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div>
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                    </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+</div>
+
+{% endblock %}

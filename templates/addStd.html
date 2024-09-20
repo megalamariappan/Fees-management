@@ -1,0 +1,189 @@
+{% include 'navbar.html' %}
+{% block content %}
+<div class="sections">
+<section id="add-std">
+  {% if messages %}
+  <div>
+    {% for message in messages %}
+    {% if message.tags == 'error' %}
+    <div class="alert alert-danger" id="alert">
+      <i class="fa-regular fa-circle-xmark"></i> 
+       {{message}}
+    </div>
+    {% endif %}
+    {% if message.tags == 'success' %}
+    <div class="alert alert-{{message.tags}}" id="alert">
+      <i class="fa-regular fa-circle-check"></i> 
+       {{message}}
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="card">
+    <div class="card-body">
+  <div class="d-flex justify-content-between border-bottom">
+    <h3 class="h4 text-primary-emphasis ms-5"><strong>Add Student</strong></h3>
+    <div>
+        <a href="{% url 'stdDetails' %}" class="text-decoration-none">Home</a>
+        <a href="{% url 'addStd' %}" class="text-decoration-none text-secondary"> / Add Student</a>
+    </div>
+    </div>
+    <div class="container-fluid p-4">
+        <div class="row justify-content-center">
+            <div class="col-11">
+              <form action="" method="POST" enctype="multipart/form-data" name="stdForm" onclick="return addStdValidate()" autocomplete="off">
+                {% csrf_token %}
+                <p id="result" class="text-danger"></p>
+                <div class="form-group row p-1">
+                    <div class="col-3">
+                    <label for="regno">Register Number</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="text" class="form-control" id="regno" name="regno" required>
+                    <p class="valid text-danger mt-1" style="font-size:12px;"></p>
+                    </div>
+                </div>
+                <div class="form-group row p-1">
+                    <div class="col-3">
+                        <label for="name" class="form-label">Name</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                </div>
+                <div class="form-group row p-1 mt-1">
+                  <div class="col-3">
+                  <label for="addate">Admission Date</label>
+                  </div>
+                  <div class="col-6">
+                  <input type="date" class="form-control" id="addate" name="addate" required>
+                  <p class="valid text-danger mt-1" style="font-size:12px;"></p>
+                  </div>
+              </div>
+                <div class="form-group row p-1">
+                    <div class="col-3">
+                    <label for="dob">Date of Birth</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="date" class="form-control" id="dob" name="dob" required>
+                    <p class="valid text-danger mt-1" style="font-size:12px;"></p>
+                    </div>
+                </div>
+                <div class="form-group row p-1 pb-3">
+                  <div class="col-3">
+                  <label for="gender">Gender</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+                    <label class="form-check-label" for="female">
+                        Female
+                    </label>
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
+                    <label class="form-check-label" for="male">
+                        Male
+                    </label>                    
+                  </div>
+                </div>
+                <div class="form-group row p-1 mt-1">
+                    <div class="col-3">
+                    <label for="dept">Department</label>
+                    </div>
+                    <div class="col-6">
+                    <select class="form-select" id="dept" name="dept" required>
+                        <option selected disabled>Select..</option>
+                        {% for t in depts %}
+                        <option value="{{t.department_name}}">{{t.department_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                </div>
+                <div class="form-group row p-1 mt-1">
+                    <div class="col-3">
+                    <label for="fname">Father Name</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="text" class="form-control" id="fname" name="fname" required>
+                    </div>    
+                </div>
+                <div class="form-group row p-1 mt-1">
+                    <div class="col-3">
+                    <label for="address">Address</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="text" class="form-control" id="address" name="address" required>
+                    </div>
+                </div>
+                <div class="form-group row p-1">
+                    <div class="col-3">
+                    <label for="contact">Contact</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="text" class="form-control" id="contact" name="contact" required>
+                    <p class="valid text-danger mt-1" style="font-size:12px;"></p>
+                    </div>
+                </div>
+                <div class="form-group row p-1 mt-1">
+                    <div class="col-3">
+                    <label for="email">Email</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                </div>
+                
+                <div class="form-group row p-1 pb-3">
+                    <div class="col-3">
+                    <label for="transport">Transport</label>
+                    </div>
+                    <div class="col-6">
+                      <input class="form-check-input" type="radio" name="transport" id="yes" value="Yes">
+                      <label class="form-check-label" for="yes">
+                          Yes
+                      </label>
+                      <input class="form-check-input" type="radio" name="transport" id="no" value="No">
+                      <label class="form-check-label" for="no">
+                          No
+                      </label> 
+                      <div class="transfees"></div>               
+                    </div>
+                </div>
+                <div class="form-group row p-1 pb-3">
+                  <div class="col-3">
+                  <label for="hostel">Hostel</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-check-input" type="radio" name="hostel" id="yes" value="Yes">
+                    <label class="form-check-label" for="yes">
+                        Yes
+                    </label>
+                    <input class="form-check-input" type="radio" name="hostel" id="no" value="No">
+                    <label class="form-check-label" for="no">
+                        No
+                    </label>                    
+                  </div>
+                </div>
+                  <div class="form-group row p-1">
+                    <div class="col-3">
+                    <label for="photo">photo</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="file" class="form-control" id="photo" name="photo" value="photo">
+                    </div>
+                </div>
+            
+                <div class="d-flex justify-content-center">
+                <input type="submit" value="submit" class="btn btn-primary btn-block col-4">
+                </div>
+            </form>
+
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+</section>
+
+</div>
+{% endblock %}

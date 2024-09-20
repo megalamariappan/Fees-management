@@ -1,0 +1,53 @@
+{% include 'navbar.html' %}
+{% block content %}
+    <div class="sections">
+        <section id="search">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-6">
+                        <h4 class="h4 m-3 col-6"><strong>Fee Payment</strong></h4>
+                    </div>
+                        <form class="col-4" action="" method="GET" autocomplete="off">
+                            <div class="form-group d-flex">
+                                <input type="text" id="searchstd" class="form-control" name="searchstd" placeholder="Search Student" value="{% if searchname %}{{searchname}}{% endif %}" >
+                            <button type="submit" class="btn btn-outline-secondary ms-1"><i class="fa fa-search"></i></button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table">
+                            <thead>
+                                <tr class="table-secondary">
+                                    <th>S.No</th>
+                                    <th>Reg.no</th>
+                                    <th>Name</th>
+                                    <th>Dept</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for stds in std %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{stds.regno}}</td>
+                                    <td>{{stds.name}}</td>
+                                    <td>{{stds.dept}}</td>
+                                    <td><a href="{% url 'checkFees' stds.id %}" class="btn btn-success">Check Fees</a></td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5">No Data Available</td>
+                                </tr>
+                                {% endfor %}
+                                
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+{% endblock %}

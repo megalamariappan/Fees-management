@@ -1,0 +1,90 @@
+{% include 'navbar.html' %}
+{% block content %}
+    <div class="sections course-details">
+        <section id="course-details">
+            <div class="container">
+                {% if messages %}
+                    <div>
+                        {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}" id="alert">
+                        {% if message.tags == 'success' %}
+                        <i class="fa-regular fa-circle-check"></i> 
+                        {% endif %}
+                        {{message}}
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <h3 class="h4 bolder">Course Details</h3>
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <div class="btn-group">
+                            {% for btns in course %}
+                            <button class="btn btn-outline-primary">{{btns.course_name}}</button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <a href="{% url 'addCourse' %}" class="btn btn-success">Course +</a>
+                        <a href="{% url 'addDept' %}" class="btn btn-success">Dept +</a>
+                    </div>
+                </div>
+                    <div class="post my-3">
+                        <div class="row">
+                            <h3 class="h5">Under Graduate</h3>
+                            {% for courses in course %}
+                            {% if courses.course_level.level == 'UG' %}
+                            <div class="col-sm-6 col-md-6 col-lg-4">
+                                <div class="cbox">
+                                    <div class="card shadow">
+                                        <div class="card-header">
+                                            <div class="d-flex justify-content-between">
+                                                    <h3 class="h5">{{courses.course_name}}</h3>
+                                                    <h3 class="h5">Rs.{{courses.fees}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="h5">{{courses.full_name}}</h5>
+                                            <p>Eligibilty : {{courses.eligibility}}</p>
+                                            <p>Duration : {{courses.duration}}yrs</p>
+                                            <p>Full Time</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="under my-3">
+                        <div class="row">
+                            <h3 class="h5">Under Graduate</h3>
+                            {% for courses in course %}
+                            {% if courses.course_level.level == 'PG' %}                            
+                            <div class="col-sm-6 col-md-6 col-lg-4">
+                                <div class="cbox">
+                                    <div class="card shadow">
+                                        <div class="card-header">
+                                            <div class="d-flex justify-content-between">
+                                                    <h3 class="h5">{{courses.course_name}}</h3>
+                                                    <h3 class="h5">Rs.{{courses.fees}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="h5">{{courses.full_name}}</h5>
+                                            <p>Eligibilty : {{courses.eligibility}}</p>
+                                            <p>Duration : {{courses.duration}}yrs</p>
+                                            <p>Full Time</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

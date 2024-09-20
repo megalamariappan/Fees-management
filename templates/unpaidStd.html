@@ -1,0 +1,73 @@
+{% include 'navbar.html' %}
+{% block content %}
+<div class="sections">
+    <section id="unpaid-std">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex justify-content-end">
+                    <div>
+                        <a href="{% url 'dashboard' %}" class="text-decoration-none">Home</a>
+                        <a href="{% url 'unpaidStd' %}" class="text-decoration-none text-secondary"> / Total Students</a>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <h2 class="h4"><strong>Unpaid Fees Students</strong></h2>
+                    <form action="" class="my-3 col-4" method="get" autocomplete="off">
+                        <div class="search d-flex">
+                            <input type="text" class="form-control" value="{% if unpaidname %}{{unpaidname}}{% endif %}" placeholder="Search Student" name="unpaidname">
+                            <button type="submit" class="btn btn-outline-secondary ms-1"><i class="fa fa-search"></i></button>
+                        </div>
+                    </form>
+                    </div>
+                <table class="table mt-3">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th>S.No</th>
+                            <th>Reg.No</th>
+                            <th>Name</th>
+                            <th>Dept</th>
+                            <th>Paid fees</th>
+                            <th>Pending Tution</th>
+                            <th>Pending Hostel</th>
+                            <th>Pending Transport</th>
+                            <th>Total pending</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in details %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{i.student.regno}}</td>
+                            <td>{{i.student.name}}</td>
+                            <td>{{i.student.dept}}</td>
+                            <td>{{i.total_paid}}.00</td>
+                            {% if i.student.pending_course %}
+                            <td>{{i.student.pending_course}}.00</td>
+                            {% else %}
+                            <td>-</td>
+                            {% endif %}
+                            {% if i.student.pending_hostel %}
+                            <td>{{i.student.pending_hostel}}.00</td>
+                            {% else %}
+                            <td>-</td>
+                            {% endif %}
+                            {% if i.student.pending_trasport %}
+                            <td>{{i.student.pending_trasport}}.00</td>
+                            {% else %}
+                            <td>-</td>
+                            {% endif %}
+                            <td>{{i.student.pending_course|add:i.student.pending_hostel|add:i.student.pending_trasport}}.00</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="9">No Data Available</td>
+                        </tr>
+                        {% endfor %}
+                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

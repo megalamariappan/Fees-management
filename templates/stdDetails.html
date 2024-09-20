@@ -1,0 +1,90 @@
+{% include 'navbar.html' %}
+{% block content %}   
+    <div class="sections">
+        <section id="std-details">
+            <div class="container">
+            <div class="px-2">
+            <div class="row">
+                <div class="col-10 mb-4">
+                <form action="" method="GET" id="detailForm" autocomplete="off">
+                    <div class="row justify-content-between">
+                        <h3 class="col-4 h4"><strong>Student Details</strong></h3>
+                        <div class="col-8 d-flex justify-content-around">
+                            <div class="form-group">
+                                <select class="form-select" name="getdept" onchange="autosubmit()">
+                                    <option disabled selected>Select Department</option>
+                                    {% for d in depts %}
+                                    <option vlaue="{{d.department_name}}" {% if d.department_name == selected_d %}selected{% endif %}>{{d.department_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="search d-flex">
+                                <input type="text" class="form-control" value="{% if gname %}{{gname}}{% endif %}" placeholder="Search Student" name="searchstd">
+                                <button type="submit" value="submit" class="ms-1 btn btn-outline-secondary"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+                <div class="col-2">
+                    <a href="{% url 'addStd' %}" class="btn btn-success bg-gradient">Add+</a>
+                </div>
+        </div>
+    </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 justify-content-center mt-4">
+                    <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr class="table-dark">
+                                <th scope="col">Photo</th>
+                                <th scope="col">Reg.No</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Dept</th>
+                                <th scope="col">Year</th>
+                                <th scope="col">JoinDate</th>
+                                <th scope="col">Batch</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone.no</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Transport</th>
+                                <th scope="col">Hostel</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        {% for i in stddetails %}
+                        <tbody>
+                            <tr scope="row">
+                                {% if i.photo %}
+                                <td><img src="{{i.photo.url}}" width="60" alt="img" class="rounded-circle"></td>
+                                {% else %}
+                                <td>No Image</td>
+                                {% endif %}
+                                <td>{{i.regno}}</td>
+                                <td>{{i.name}}</td>
+                                <td>{{i.dept}}</td>
+                                <td>{{i.year}}</td>
+                                <td>{{i.addate}}</td>
+                                <td>{{i.batch}}</td>
+                                <td>{{i.email}}</td>
+                                <td>{{i.contact}}</td>
+                                <td>{{i.address}}</td>
+                                <td>{{i.transport}}</td>
+                                <td>{{i.hostel}}</td>
+                                <td><span class="d-flex"><a href="{% url 'editStd' i.id %}" class="me-1"><i class="fa-solid fa-pen-to-square rounded bg-success bg-gradient text-white p-2"></i></a>
+                                    <a href="{% url 'deleteStd' i.id %}"><i class="fa-solid fa-trash-can rounded bg-danger bg-gradient text-white p-2"></i></a></span></td>
+                                    {% empty %}
+                                    <td colspan="13">No Data are Available</td>
+                                </tr>
+                        </tbody>
+                        {% endfor %}
+                        
+                    </table>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

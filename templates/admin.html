@@ -1,0 +1,68 @@
+{% include 'navbar.html' %}
+{% block content %}
+    <div class="sections">
+        <section id="adminprofile" class="p-2">
+            <div class="container">
+                <h3 class="h4 my-2">Admin Profile</h3>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="box">
+                        <div class="form-group text-center">
+                            <i class="fa-solid fa-circle-user user-profile fa-5x"></i>
+                            <div>
+                            <h3 for="photo" class="h5 py-3 mb-2">Change Photo<i class="fa-solid fa-pen-to-square p-2 text-secondary"></i></h3>
+                            <p>Admin Name</p>
+                            <p>admin123@gmail.com</p>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="form-group col-6 py-2">
+                                <label for="uname">User Name</label>
+                                <input type="text" class="form-control" id="uname">
+                            </div>
+                            <div class="form-group col-6 py-2">
+                                <label for="mail" class="pt-2">Email</label>
+                                <input type="email" class="form-control" id="mail">
+                            </div>
+                        </div>
+                            <div class="row py-2">
+                            <div class="form-group col-6">
+                                <label for="pw">Password</label>
+                                <input type="password" class="form-control" id="pw">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="repw">Re-Enter Password</label>
+                                <input type="password" class="form-control" id="repw">
+                            </div>
+                            </div>
+                            <div class="form-group py-2">
+                                <label for="desig">Designation</label>
+                                <input type="password" class="form-control" id="desig">
+                            </div>
+                            <div class="form-group py-2">
+                                <label for="ad">Address</label>
+                                <input type="address" class="form-control" id="ad">
+                            </div>
+                            <div class="row py-2">
+                            <div class="form-group col-6">
+                                <label for="proof">ID Proof</label>
+                                <input type="text" class="form-control" id="proof">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="idnum">ID Number</label>
+                                <input type="text" class="form-control" id="idnum">
+                            </div>
+                            </div>
+                            
+                            <button class="btn btn-success bg-gradient my-3">Save</button>
+                            <button class="btn btn-secondary bg-gradient my-3">Cancel</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

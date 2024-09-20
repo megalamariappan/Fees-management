@@ -1,0 +1,56 @@
+{% include 'navbar.html' %}
+{% block content %}
+<div class="sections">
+    <section id="tot-students mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex justify-content-end">
+                    <div>
+                        <a href="{% url 'dashboard' %}" class="text-decoration-none">Home</a>
+                        <a href="{% url 'totStd' %}" class="text-decoration-none text-secondary"> / Total Students</a>
+                    </div>
+                </div>
+                <div class="title d-flex justify-content-between">
+                <h2 class="h4 my-3"><strong>Total Students</strong></h2>
+                <form action="" class="my-3 col-4" method="GET" autocomplete="off">
+                    <div class="search d-flex">
+                        <input type="text" class="form-control" value="{% if stdname %}{{stdname}}{% endif %}" placeholder="Search Name" name="namesearch">
+                        <button type="submit" class="btn btn-outline-secondary ms-1"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
+                </div>
+                <table class="table mt-3">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th>S.No</th>
+                            <th>Reg.No</th>
+                            <th>Name</th>
+                            <th>Dept</th>
+                            <th>Year</th>
+                            <th>Contact</th>
+                            <th>Place</th>
+                        </tr>
+                    </thead>
+                    {% for i in namesearch %}
+                    <tbody>
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{i.regno}}</td>
+                            <td>{{i.name}}</td>
+                            <td>{{i.dept}}</td>
+                            <td>{{i.year}}</td>
+                            <td>{{i.contact}}</td>
+                            <td>{{i.address}}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7">No Data Available</td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </section>
+    </div>
+{% endblock %}

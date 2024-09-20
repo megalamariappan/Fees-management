@@ -1,0 +1,108 @@
+.active,.nav li:hover{
+    background-color:rgb(0,128,128);
+    /* box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.158); */
+}
+ /* body{
+background-color:rgb(243, 208, 232);
+color:#eeeded;
+}  */
+.sidebar{
+    /* background:linear-gradient(to bottom,rgb(15, 9, 65),rgb(0, 1, 10)); */
+    z-index:5;
+    /* background-color: rgb(0,128,128); */
+    position:fixed;
+    left:0;
+    top:0;
+}
+
+.sidebar a{
+    font-weight:600;
+    font-size:1.1rem;
+}
+.navbar{
+    z-index:4;
+    top:0;
+    left:0;
+}
+.navbar .navbar-brand{
+    margin-left:240px;
+}
+
+.search-icon{
+    top:10px;
+    right:10px;
+}
+.sections{
+    padding:20px;
+    margin-left:245px;
+    margin-top:75px;
+}
+.view label,#details .batch,#course-details .bolder{
+    font-weight:650;
+}
+#dashboard .card{
+    min-height:180px;
+}
+.user-profile{
+    font-size:35px;
+}
+.list-down{
+    right:5px;
+    width:220px;
+    display:none;
+}
+.pro-disp{
+    display:block;
+}
+table tr,th{
+    text-align: center;
+    vertical-align: middle;
+}
+.box{
+    width:97%;
+    padding:5px;
+}
+.cbox{
+    margin:  10px 0;
+}
+.hover a{
+    color:white;
+}
+.hover a:hover{
+    color:rgb(137, 191, 212);
+}
+.sandal{
+    background-color:#e1ddb2;
+}
+.pink{
+    background-color:#eeb9da;
+}
+.green{
+    background-color:#b2eaae;
+}
+.ink{
+    background-color:#cdc5ee;
+}
+
+/* The Modal (background) */
+#stdpayment .popup {
+    display:none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.popup-content {
+  margin: 12% auto; /* 15% from the top and centered */
+  padding: 20px;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+#stdpayment .open-popup{
+    display: block;
+}

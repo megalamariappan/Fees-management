@@ -1,0 +1,192 @@
+{% include 'navbar.html' %}
+{% block content %}
+<div class="sections">
+<section id="add-std">
+  {% if messages %}
+  <div>
+    {% for message in messages %}
+    {% if message.tags == 'error' %}
+    <div class="alert alert-danger" id="alert">
+      <i class="fa-regular fa-circle-xmark"></i> 
+       {{message}}
+    </div>
+    {% endif %}
+    {% if message.tags == 'success' %}
+    <div class="alert alert-{{message.tags}}" id="alert">
+      <i class="fa-regular fa-circle-check"></i> 
+       {{message}}
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="card">
+    <div class="card-body">
+  <div class="d-flex justify-content-between border-bottom">
+    <h3 class="h4 text-primary-emphasis ms-5"><strong>Edit Student</strong></h3>
+    <div>
+        <a href="{% url 'stdDetails' %}" class="text-decoration-none">Home</a>
+    </div>
+    </div>
+    <div class="container-fluid p-4">
+        <div class="row justify-content-center">
+            <div class="col-11">
+              <form action="" method="POST" enctype="multipart/form-data" name="stdForm" onclick="return addStdValidate()">
+                {% csrf_token %}
+                <p id="result" class="text-danger"></p>
+                <div class="form-group row p-1">
+                    <div class="col-3">
+                    <label for="regno">Register Number</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="text" class="form-control" id="regno" name="regno" value="{{i.regno}}" required>
+                    <p class="valid text-danger mt-1" style="font-size:12px;"></p>
+                    </div>
+                </div>
+                <div class="form-group row p-1">
+                    <div class="col-3">
+                        <label for="name" class="form-label">Name</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" class="form-control" id="name" name="name" value="{{i.name}}" required>
+                    </div>
+                </div>
+                <div class="form-group row p-1 mt-1">
+                  <div class="col-3">
+                  <label for="addate">Admission Date</label>
+                  </div>
+                  <div class="col-6">
+                  <input type="date" class="form-control" id="addate" name="addate" value="{{i.addate|date:'Y-m-d'}}" required>
+                  <p class="valid text-danger mt-1" style="font-size:12px;"></p>
+                  </div>
+              </div>
+                <div class="form-group row p-1">
+                    <div class="col-3">
+                    <label for="dob">Date of Birth</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="date" class="form-control" id="dob" name="dob" value="{{i.dob|date:'Y-m-d'}}" required>
+                    <p class="valid text-danger mt-1" style="font-size:12px;"></p>
+                    </div>
+                </div>
+                <div class="form-group row p-1 pb-3">
+                  <div class="col-3">
+                  <label for="gender">Gender</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female" {% if i.gender|lower == 'female' %}checked{% endif %}>
+                    <label class="form-check-label" for="female">
+                        Female
+                    </label>
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="Male" {% if i.gender|lower == 'male' %}checked{% endif %}>
+                    <label class="form-check-label" for="male">
+                        Male
+                    </label>                    
+                  </div>
+                </div>
+                <div class="form-group row p-1 mt-1">
+                    <div class="col-3">
+                    <label for="dept">Department</label>
+                    </div>
+                    <div class="col-6">
+                    <select class="form-select" id="dept" name="dept" required>
+                        {% for t in dept %}
+                        <option value="{{t.department_name}}" {% if t.department_name == i.dept %}selected{% endif %}>{{t.department_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                </div>
+                <div class="form-group row p-1 mt-1">
+                    <div class="col-3">
+                    <label for="fname">Father Name</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="text" class="form-control" id="fname" name="fname" value="{{i.fathername}}" required>
+                    </div>    
+                </div>
+                <div class="form-group row p-1 mt-1">
+                    <div class="col-3">
+                    <label for="address">Address</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="text" class="form-control" id="address" name="address" value="{{i.address}}" required>
+                    </div>
+                </div>
+                <div class="form-group row p-1">
+                    <div class="col-3">
+                    <label for="contact">Contact</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="text" class="form-control" id="contact" name="contact" value="{{i.contact}}" required>
+                    <p class="valid text-danger mt-1" style="font-size:12px;"></p>
+                    </div>
+                </div>
+                <div class="form-group row p-1 mt-1">
+                    <div class="col-3">
+                    <label for="email">Email</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="email" class="form-control" id="email" name="email" value="{{i.email}}" required>
+                    </div>
+                </div>
+                
+                <div class="form-group row p-1 pb-3">
+                    <div class="col-3">
+                    <label for="transport">Transport</label>
+                    </div>
+                    <div class="col-6">
+                      <input class="form-check-input" type="radio" name="transport" id="yes" value="Yes" {% if i.transport|lower == 'yes' %}checked{% endif %}>
+                      <label class="form-check-label" for="yes">
+                          Yes
+                      </label>
+                      
+                      <input class="form-check-input" type="radio" name="transport" id="no" value="No" {% if i.transport|lower == 'no' %}checked{% endif %}>
+                      <label class="form-check-label" for="no">
+                          No
+                      </label> 
+                      <div class="transfees">
+                        {% if i.transport|lower == 'yes' %}
+                      <input type="text" name="transportfees" id="transportid" class="form-control" placeholder="Enter Transport Fees" value="{{i.transport_fees}}">
+                      {% endif %}              
+                    </div>   
+                    </div>
+                </div>
+                <div class="form-group row p-1 pb-3">
+                  <div class="col-3">
+                  <label for="hostel">Hostel</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-check-input" type="radio" name="hostel" id="yes" value="Yes" {% if i.hostel|lower == 'yes' %}checked{% endif %}>
+                    <label class="form-check-label" for="yes">
+                        Yes
+                    </label>
+                    <input class="form-check-input" type="radio" name="hostel" id="no" value="No" {% if i.hostel|lower == 'no' %}checked{% endif %}>
+                    <label class="form-check-label" for="no">
+                        No
+                    </label>                    
+                  </div>
+                </div>
+                  <div class="form-group row p-1">
+                    <div class="col-3">
+                    <label for="photo">photo</label>
+                    </div>
+                    <div class="col-6">
+                    <input type="file" class="form-control" id="photo" name="photo" value="{{i.photo}}" required>
+                    </div>
+                </div>
+            
+                <div class="d-flex justify-content-center">
+                <input type="submit" value="Save" class="btn btn-primary btn-block col-4">
+                </div>
+            </form>
+
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+</section>
+
+</div>
+{% endblock %}

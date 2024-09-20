@@ -1,0 +1,59 @@
+{% include 'navbar.html' %}
+{% block content %}
+<div class="sections">
+    <section id="addadmin">
+    <div class="container">
+        <div class="row justify-content-center">
+            <h3 class="h4"><strong>Add Admin</strong></h3>
+            <div class="col-10 mt-3">
+                <form>
+                    <div class="row">
+                        <div class="form-group col-6 py-2">
+                            <label for="uname">User Name</label>
+                            <input type="text" class="form-control" id="uname">
+                        </div>
+                        <div class="form-group col-6 py-2">
+                            <label for="mail" class="pt-2">Email</label>
+                            <input type="email" class="form-control" id="mail" placeholder="sample@gmail.com">
+                        </div>
+                    </div>
+                        <div class="row py-2">
+                        <div class="form-group col-6">
+                            <label for="pw">Password</label>
+                            <input type="password" class="form-control" id="pw" placeholder="..........">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="repw">Re-Enter Password</label>
+                            <input type="password" class="form-control" id="repw" placeholder="..........">
+                        </div>
+                        </div>
+                        <div class="form-group py-2">
+                            <label for="desig">Designation</label>
+                            <input type="password" class="form-control" id="desig">
+                        </div>
+                        <div class="form-group py-2">
+                            <label for="ad">Address</label>
+                            <input type="address" class="form-control" id="ad">
+                        </div>
+                        <div class="row py-2">
+                        <div class="form-group col-6">
+                            <label for="proof">ID Proof</label>
+                            <input type="text" class="form-control" id="proof">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="idnum">ID Number</label>
+                            <input type="text" class="form-control" id="idnum">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="photo">Upload Photo</label>
+                            <input type="file" id="photo" class="ms-3">
+                        </div>
+                    </div>
+                        <button class="btn btn-primary bg-gradient my-3">Submit</button>
+                    </form>
+                </div>
+        </div>
+    </div>
+    </section>
+</div>
+{% endblock %}

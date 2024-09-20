@@ -1,0 +1,73 @@
+{% include 'navbar.html' %}
+{% block content %}
+<div class="sections">
+        <section id="feereport">
+            <div class="container">
+                <div class="row">
+                    <h3 class="h4 my-3 col-6"><strong>Student Fee Report</strong></h3>
+                    <div class="col-6">
+                        <form action="" method="GET" id="reportForm">
+                        <div class="form-group p-2">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col-8">
+                                    <select id="dept" class="form-control form-select" name="getdep" onchange="automaticsubmit()">
+                                        <option selected disabled>Select Department</option>
+                                        {% for i in depts %}
+                                        <option value="{{i.department_name}}" {% if getdep == i.department_name %}selected{% endif %}>{{i.department_name}}</option>
+                                        {% endfor %}
+                                    </select>      
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="feereporttable" class="mt-3">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                    <table class="table">
+                        <thead>
+                            <tr class="table-secondary">
+                                <th>S.No</th>
+                                <th>Name</th>
+                                <th>Dept</th>
+                                <th>Tution Fees</th>
+                                <th>Transport Fees</th>
+                                <th>Hostel Fees</th>
+                            </tr>
+                        </thead>
+                        {% for i in details %}
+                        <tbody>
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{i.name}}</td>
+                                <td>{{i.dept}}</td>
+                                <td>{{i.course_fees}}</td>
+                                {% if i.transport_fees %}
+                                <td>{{i.transport_fees}}</td>
+                                {% else %}
+                                <td>-</td>
+                                {% endif %}
+                                {% if i.hostel_fees %}
+                                <td>{{i.hostel_fees}}</td>
+                                {% else %}
+                                <td>-</td>
+                                {% endif %}
+                                {% empty %}
+                                <td colspan="6">No Data are Available</td>
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

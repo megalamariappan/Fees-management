@@ -1,0 +1,54 @@
+{% include 'navbar.html' %}
+{% block content %}
+<div class="sections">
+    <section id="paid-std">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex justify-content-end">
+                    <div>
+                        <a href="{% url 'dashboard' %}" class="text-decoration-none">Home</a>
+                        <a href="{% url 'paidStd' %}" class="text-decoration-none text-secondary"> / Total Students</a>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                <h2 class="h4"><strong>paid Fees Students</strong></h2>
+                <form action="" method="GET" class="col-4" autocomplete="off">
+                    <div class="search d-flex">
+                        <input type="text" class="form-control" value="{% if paid_name %}{{paid_name}}{% endif %}" placeholder="Search Student" name="paidname">
+                        <button type="submit" class="btn btn-outline-secondary ms-1"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
+                </div>
+                <table class="table mt-4">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th>S.No</th>
+                            <th>Reg.No</th>
+                            <th>Name</th>
+                            <th>Dept</th>
+                            <th>Total fees</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    {% for i in detail %}
+                    <tbody>
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{i.regno}}</td>
+                            <td>{{i.name}}</td>
+                            <td>{{i.dept}}</td>
+                            <td>{{i.total_fees}}.00</td>
+                            <td><button class="btn btn-success rounded-pill">Paid</button></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6">No Data Available</td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </section>
+    </div>
+{% endblock %}
